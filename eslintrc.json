@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "eslint:recommended"
+  ],
+  "plugins": [
+    "import",
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "commonjs": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "indent": ["error", 2, {
+      "SwitchCase": 0
+    }],
+    "key-spacing": ["error", {
+      "mode": "minimum"
+    }],
+    "new-cap": ["error", {
+      "capIsNewExceptions": [
+        "List", "Map", "Set", "Seq", "OrderedMap", "OrderedSet", "Express"
+      ]
+    }],
+    "no-console": ["warn", {
+      "allow": ["warn", "error", "info"]
+    }],
+    "no-multi-spaces": "off",
+    "one-var": "off",
+    "strict": 1,
+    "max-len": ["warn", {
+      "code": 100,
+      "ignoreComments": true
+    }]
+  }
+}

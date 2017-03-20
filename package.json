@@ -1,0 +1,41 @@
+{
+  "name": "revolut-test",
+  "version": "0.0.1",
+  "description": "Test app for my Revolut job application",
+  "scripts": {
+    "typecheck": "flow",
+    "test": "jest",
+    "build": "webpack",
+    "devserver": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FoxWhite/revolut_test.git"
+  },
+  "author": "Foxwhite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FoxWhite/revolut_test/issues"
+  },
+  "homepage": "https://github.com/FoxWhite/revolut_test#readme",
+  "dependencies": {
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.2.2",
+    "babel-preset-react": "^6.23.0",
+    "dotenv": "^4.0.0",
+    "eslint": "^3.18.0",
+    "jest": "^19.0.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "eslint-plugin-import": "^2.2.0",
+    "flow-bin": "^0.42.0",
+    "webpack-dev-server": "^2.4.2"
+  }
+}

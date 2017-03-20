@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+flow-typed
+
+# production
+bundle.js
+*.map
+
+# misc
+.DS_Store
+*.swp
+.eslintcache
+npm-debug.log
+coverage
+
+# Yarn error log
+yarn-error.log
+
+# Flow type definitions
+flow-typed

@@ -1,2 +1,2 @@
 # revolut_test
-application task for Revolut
+Application task for Revolut
