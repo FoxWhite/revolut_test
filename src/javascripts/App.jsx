@@ -9,7 +9,8 @@ import {getRates} from 'redux/actions/exchangeRates';
 
 // test
 type Props = {
-  rates:      RatesStore,
+  ratesData:  RatesStore,
+  dispatch:   Function,
 };
 
 @connect(state => ({
@@ -22,7 +23,9 @@ export default class App extends Component {
   // in larger projects, for demo purposes
   props: Props;
 
-  componentWillReceiveProps(nextProps) {
+  ratesPoll: number;
+
+  componentWillReceiveProps(nextProps: Props) {
     const currRates = this.props.ratesData.data.rates;
     const nextRates = nextProps.ratesData.data.rates;
     if (currRates !== nextRates) {

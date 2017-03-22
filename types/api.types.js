@@ -1,5 +1,10 @@
 declare type GetRatesResult = {
   rates?: Rates,
   base?:  string,
-  error?: StatusError,
+  error?: string,
 };
+
+declare type ApiResponse = {
+  status: number,
+  statusText: string
+}

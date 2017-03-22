@@ -39,9 +39,9 @@ const ratesFetchSuccess = (rates) =>
   })
 
 
-const getRates = () =>
-  dispatch =>
-    new Promise((resolve) => {
+const getRates = () => {
+  return function (dispatch: any) {
+    return new Promise((resolve) => {
       resolve(dispatch(ratesFetchBegin()))
     })
       .then(() => {
@@ -55,9 +55,11 @@ const getRates = () =>
               }));
             },
             // Fetch fail
-            reason => dispatch(ratesFetchError(reason.error))
+            reason => dispatch(ratesFetchError(reason))
           )
       });
+  }
+}
 
 
 

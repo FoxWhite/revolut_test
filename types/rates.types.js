@@ -7,6 +7,10 @@ declare type Rates = {
 // usually this kind of typing works really well with Immutable.js
 // here we store things as plain objects.
 declare type RatesStore = {
-  rates: Rates,
-  base:  string,
+  data: {
+    rates: Rates,
+    base:  string,
+  },
+  isFetching: boolean,
+  error: ?string,
 }
