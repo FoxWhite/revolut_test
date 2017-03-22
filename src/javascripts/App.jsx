@@ -7,7 +7,8 @@ import { connect }          from 'react-redux';
 import {ratesPollInterval}    from 'config';
 import {getRates} from 'redux/actions/exchangeRates';
 
-// test
+import CurrencyExchangePage from 'containers/CurrencyExchangePage';
+
 type Props = {
   ratesData:  RatesStore,
   dispatch:   Function,
@@ -54,9 +55,10 @@ export default class App extends Component {
     );
   }
 
-  render(){
+  render() {
+    const { ratesData } = this.props;
     return (
-      <div>Here be revolut app</div>
+      <CurrencyExchangePage ratesData={ratesData} />
     );
   }
 }
