@@ -1,11 +1,10 @@
 // import './styles/index.sass'
-import App from './javascripts/App.jsx'
-import { render } from 'react-dom'
+import App   from './javascripts/App.jsx'
 import React from 'react'
-// import { createStore } from 'redux'
-// import { preset, initialState } from './app/redux/reducers.js'
+import { render }   from 'react-dom'
 import { Provider } from 'react-redux'
-import config from 'config';
+import config       from 'config';
+import store from 'redux/reducers';
 
 main();
 
@@ -14,10 +13,6 @@ function main() {
   app.className = 'revolut-app-wrapper';
   document.body.appendChild(app);
 
-  const store={};
-
-  console.log('process.env', process.env);
-  console.log('config', config);
   render(
       <Provider store={store}>
         <App/>

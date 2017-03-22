@@ -5,6 +5,9 @@
 
 module.exports = {
   openExchangeRate: {
-    appId: process.env.OER_ID
+    appId: process.env.OER_ID,
+    api: {
+      getLatest: process.env.OER_API_LATEST,
+    }
   },
 };
