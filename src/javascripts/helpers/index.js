@@ -1,7 +1,6 @@
 /*
   checks for redux Rates store, if the rates finished loading and have no errors.
 */
-
 export const ratesAreLoaded = (ratesData: RatesStore): boolean => {
   const { data } = ratesData;
   return (
@@ -12,3 +11,5 @@ export const ratesAreLoaded = (ratesData: RatesStore): boolean => {
   );
 }
 
+export const roundToDecimals = (val: number, decimalPlaces: number): number =>
+  Math.round(val * (10 ** decimalPlaces)) / (10 ** decimalPlaces)

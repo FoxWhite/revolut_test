@@ -11,4 +11,9 @@ module.exports = {
     }
   },
   ratesPollInterval: 30000, // ms
+  supportedCurrencies: {
+    'USD': '$',
+    'GBP': '£',
+    'EUR': '€'
+  },
 };

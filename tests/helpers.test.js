@@ -1,6 +1,9 @@
 /* eslint-env node, jest */
 
-import { ratesAreLoaded } from 'helpers';
+import {
+  ratesAreLoaded,
+  roundToDecimals,
+} from 'helpers';
 
 
 describe('ratesAreLoaded', () => {
@@ -30,5 +33,15 @@ describe('ratesAreLoaded', () => {
     expect(ratesAreLoaded(mockRatesStore)).toBe(false);
     mockRatesStore.error = null;
     expect(ratesAreLoaded(mockRatesStore)).toBe(true);
+  });
+});
+
+describe('roundToDecimals', () => {
+  it('should round given number at most to given decimal places', () => {
+    expect(roundToDecimals(10, 1)).toBe(10);
+    expect(roundToDecimals(10.2, 1)).toBe(10.2);
+    expect(roundToDecimals(234.2199, 2)).toBe(234.22);
+    expect(roundToDecimals(-234.2199, 2)).toBe(-234.22);
+    expect(roundToDecimals(0.908095, 5)).toBe(0.9081);
   });
 });
