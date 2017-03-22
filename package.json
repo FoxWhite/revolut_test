@@ -5,7 +5,7 @@
   "scripts": {
     "typecheck": "flow",
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack -p",
     "devserver": "webpack-dev-server"
   },
   "repository": {

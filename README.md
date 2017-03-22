@@ -15,7 +15,7 @@ Starts a development server (using webpack-dev-server) on `http://localhost:8080
 
 #### `npm run build `
 
-Bundles assets and all the things to _public/_ dir.
+Bundles assets and all the things to _public/_ dir. (minified production build)
 
 #### `npm run typecheck `
 
