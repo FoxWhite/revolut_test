@@ -4,10 +4,8 @@
 
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-
-// test
+import {ratesPollInterval}    from 'config';
 import {getRates} from 'redux/actions/exchangeRates';
-  //
 
 // test
 type Props = {
@@ -15,7 +13,7 @@ type Props = {
 };
 
 @connect(state => ({
-  rates:    state.data,
+  ratesData:    state,
 }))
 export default class App extends Component {
   // Some flow typing instead of propTypes here.
@@ -24,9 +22,33 @@ export default class App extends Component {
   // in larger projects, for demo purposes
   props: Props;
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    const currRates = this.props.ratesData.data.rates;
+    const nextRates = nextProps.ratesData.data.rates;
+    if (currRates !== nextRates) {
+      clearTimeout(this.ratesPoll);
+    }
+    if (!nextProps.ratesData.isFetching) {
+      this.startPoll();
+    }
+  }
+
+  componentWillMount() {
+    // we could also mapDispatchToProps.
     const { dispatch } = this.props;
     dispatch(getRates());
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.ratesPoll);
+  }
+
+  startPoll() {
+    const { dispatch } = this.props;
+    this.ratesPoll = setTimeout(
+      () => dispatch(getRates()),
+      ratesPollInterval
+    );
   }
 
   render(){

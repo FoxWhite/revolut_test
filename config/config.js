@@ -10,4 +10,5 @@ module.exports = {
       getLatest: process.env.OER_API_LATEST,
     }
   },
+  ratesPollInterval: 30000, // ms
 };
