@@ -12,6 +12,10 @@ type Props = {
 };
 
 export default class CurrencyExchangePage extends Component {
+  props: Props;
+  money: Function;
+  state: { ratesLoaded: boolean };
+
   constructor(props: Props) {
     super(props);
     this.money = fx; // lib object containing current exchange data and methods.
@@ -34,7 +38,7 @@ export default class CurrencyExchangePage extends Component {
     }
   }
 
-  setNewRates(ratesData) {
+  setNewRates(ratesData: RatesStore) {
     const { data } = ratesData;
     this.money.rates = data.rates;
     this.money.base = data.base;

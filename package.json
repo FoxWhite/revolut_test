@@ -8,6 +8,16 @@
     "build": "webpack -p",
     "devserver": "webpack-dev-server"
   },
+  "jest": {
+    "moduleDirectories": [
+        "node_modules",
+        "<rootDir>/src/javascripts"
+    ],
+    "moduleFileExtensions": [
+        "js",
+        "jsx"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FoxWhite/revolut_test.git"
