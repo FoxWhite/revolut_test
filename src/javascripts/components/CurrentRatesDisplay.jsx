@@ -1,4 +1,5 @@
 import React from 'react';
+import './CurrentRatesDisplay.sass';
 /**
  * @flow
  */
@@ -11,7 +12,7 @@ type Props = {
 };
 
 const CurrentRatesDisplay = ({ratesLoaded, fromCurr, toCurr, rate}: Props) =>
-  <div className="current-rates">
+  <div className="CurrentRatesDisplay">
     {
       ratesLoaded
         ? `${fromCurr}1 = ${toCurr}${rate}`

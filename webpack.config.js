@@ -17,7 +17,7 @@ module.exports = {
       filename: "bundle.js",
   },
   resolve: {
-    modules: ['node_modules', 'src/javascripts', 'src'],
+    modules: ['node_modules', 'src/javascripts', 'src/stylesheets', 'src'],
     extensions: ['.js', '.jsx', '.sass'],
     alias: {
       config: path.resolve('./config/config.js'),

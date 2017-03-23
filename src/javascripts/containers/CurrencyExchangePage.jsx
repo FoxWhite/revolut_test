@@ -8,8 +8,7 @@ import {
   roundToDecimals,
 }                            from 'helpers';
 import CurrentRatesDisplay   from 'components/CurrentRatesDisplay';
-import Select                from 'react-select';
-import 'react-select/dist/react-select.css';
+import MoneySelector         from 'components/MoneySelector';
 
 import { supportedCurrencies } from 'config';
 import fx from 'money';
@@ -110,6 +109,15 @@ export default class CurrencyExchangePage extends Component {
     }));
   }
 
+  onSwapClick = () => {
+    this.setState((currentState) => ({
+      toAmount:     currentState.fromAmount,
+      fromAmount:   currentState.toAmount,
+      toCurrency:   currentState.fromCurrency,
+      fromCurrency: currentState.toCurrency,
+    }));
+  }
+
   render() {
     const selectOpts = Object.keys(supportedCurrencies).map(cur => ({value: cur, label: cur}));
     const {
@@ -134,38 +142,27 @@ export default class CurrencyExchangePage extends Component {
             rate={rate}
           />
         }
-        <div className="from-selector">
-          <input
-            name="amount-from"
-            type="number"
-            value={roundToDecimals(fromAmount, 4)}
-            onChange={(e) => this.onChangeFromAmount(e.target.value)}
-          />
-          <br/><br/>
-          <Select
-            name="currency-from"
-            value={fromCurrency}
-            options={selectOpts}
-            onChange={(e) => this.onChangeFromCurrency(e.value)}
-            searchable={false}
-            clearable={false}
+        <div className="money-selector-wrapper">
+          <MoneySelector
+            namePostfix="from"
+            inputValue={roundToDecimals(fromAmount, 4)}
+            onInputChange={(e) => this.onChangeFromAmount(e.target.value)}
+            selectValue={fromCurrency}
+            selectOpts={selectOpts}
+            onSelectChange={(e) => this.onChangeFromCurrency(e.value)}
           />
         </div>
-        <div className="to-selector">
-          <input
-            name="amount-from"
-            type="number"
-            value={roundToDecimals(toAmount, 4)}
-            onChange={(e) => this.onChangeToAmount(e.target.value)}
-          />
-          <br/><br/>
-          <Select
-            name="currency-to"
-            value={toCurrency}
-            options={selectOpts}
-            onChange={(e) => this.onChangeToCurrency(e.value)}
-            searchable={false}
-            clearable={false}
+        <button className="swap-button"
+          onClick={this.onSwapClick}
+        >⇆</button>
+        <div className="money-selector-wrapper">
+          <MoneySelector
+            namePostfix="from"
+            inputValue={roundToDecimals(toAmount, 4)}
+            onInputChange={(e) => this.onChangeToAmount(e.target.value)}
+            selectValue={toCurrency}
+            selectOpts={selectOpts}
+            onSelectChange={(e) => this.onChangeToCurrency(e.value)}
           />
         </div>
       </div>

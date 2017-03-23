@@ -9,6 +9,8 @@ import {getRates} from 'redux/actions/exchangeRates';
 
 import CurrencyExchangePage from 'containers/CurrencyExchangePage';
 
+import 'stylesheets/index';
+
 type Props = {
   ratesData:  RatesStore,
   dispatch:   Function,
