@@ -111,10 +111,13 @@ export default class CurrencyExchangePage extends Component {
 
   onSwapClick = () => {
     this.setState((currentState) => ({
-      toAmount:     currentState.fromAmount,
-      fromAmount:   currentState.toAmount,
+      // swap currencies, recalc 'to' amount.
       toCurrency:   currentState.fromCurrency,
       fromCurrency: currentState.toCurrency,
+      toAmount:  this.money.convert(currentState.fromAmount, {
+        from: currentState.toCurrency,
+        to: currentState.fromCurrency
+      }),
     }));
   }
 
