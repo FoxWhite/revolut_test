@@ -24,8 +24,7 @@ export default class App extends Component {
   // Not really necessary in this project though,
   // so basically I did this the way I'd usually do
   // in larger projects, for demo purposes
-  props: Props;
-
+  props:     Props;
   ratesPoll: number;
 
   componentWillReceiveProps(nextProps: Props) {

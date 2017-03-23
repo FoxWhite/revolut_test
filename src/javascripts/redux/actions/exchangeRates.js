@@ -65,8 +65,7 @@ const getRates = () => {
 
 function fetchLatestRates(): Promise<GetRatesResult> {
   const { api, appId } = config.openExchangeRate;
-  // const url = api.getLatest.replace('[id]', appId);
-  const url = './mock_api.json';
+  const url = api.getLatest.replace('[id]', appId);
   return fetch(url, {
     method:      'GET',
     headers: {

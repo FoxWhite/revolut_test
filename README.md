@@ -21,6 +21,10 @@ Bundles assets and all the things to _public/_ dir. (minified production build)
 
 Initiates flow typecheck. Flow coverage is small, basically for demo purpose.
 
+#### `npm run test `
+
+Runs Jest tests.
+
 ## About:
 
 While doing this task, I tried to balance between demonstrating my technical skills and knowledge on the one hand, and not overcomplicating things (this being a small project) on the other.

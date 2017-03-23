@@ -119,7 +119,9 @@ export default class CurrencyExchangePage extends Component {
   }
 
   render() {
-    const selectOpts = Object.keys(supportedCurrencies).map(cur => ({value: cur, label: cur}));
+    const selectOpts = Object.keys(supportedCurrencies).map(
+      cur => ({value: cur, label: cur})
+    );
     const {
       fromCurrency,
       toCurrency,
@@ -127,12 +129,20 @@ export default class CurrencyExchangePage extends Component {
       fromAmount,
       toAmount,
     } = this.state;
+    const {error} =  this.props.ratesData;
+
     const rate = ratesLoaded
       ? this.money.convert(1, {from: fromCurrency, to: toCurrency})
       : null;
 
     return (
       <div className='exchanger-wrapper'>
+        {
+          error &&
+          <div className="error-message">
+            {`${error} :(`}
+          </div>
+        }
         {
           fromCurrency !== toCurrency &&
           <CurrentRatesDisplay
