@@ -64,9 +64,18 @@ export default class CurrencyExchangePage extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { ratesData } = nextProps;
+    const { ratesData, accountsData } = nextProps;
     if (ratesAreLoaded(ratesData)) {
       this.setNewRates(ratesData);
+    }
+    if(this.props.accountsData !== nextProps.accountsData) {
+      const validatorConfig = {
+        ...this.state,
+        accounts: accountsData
+      };
+      this.setState({
+        validator: validate(validatorConfig)
+      });
     }
   }
 
@@ -205,8 +214,8 @@ export default class CurrencyExchangePage extends Component {
       toCurrency,
       fromAmount,
       toAmount } = this.state;
-
-    dispatch(transfer(fromCurrency, toCurrency, fromAmount, toAmount));
+    // convert to Number just in case.
+    dispatch(transfer(fromCurrency, toCurrency, Number(fromAmount), Number(toAmount)));
   }
 
   render() {
