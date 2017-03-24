@@ -1,3 +1,7 @@
+/**
+  * @flow
+  */
+
 /*
   checks for redux Rates store, if the rates finished loading and have no errors.
 */

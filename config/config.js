@@ -12,8 +12,10 @@ module.exports = {
   },
   ratesPollInterval: 30000, // ms
   supportedCurrencies: {
-    'USD': '$',
-    'GBP': '£',
-    'EUR': '€'
+    "GBP": "\u00a3",
+    "EUR": "\u20ac",
+    "USD": "\u0024",
   },
+  // accounts storage name in localStorage
+  LS_ACCOUNTS: 'revolutAccounts',
 };
