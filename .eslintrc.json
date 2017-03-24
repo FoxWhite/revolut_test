@@ -1,10 +1,12 @@
 {
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   "plugins": [
     "import",
-    "react"
+    "react",
+    "flowtype"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -13,6 +15,7 @@
     "commonjs": true
   },
   "rules": {
+    "flowtype/define-flow-type": 1,
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
     "indent": ["error", 2, {

@@ -1,3 +1,6 @@
+/* eslint-env node */
+
+
 // load environment variables from .env file.
 require('dotenv').config({ silent: true });
 // these environment variables will go to process.env global object.
@@ -6,15 +9,13 @@ var env = getClientEnvironment();
 
 var webpack = require('webpack');
 var path    = require('path');
-var config  = require('./config/config');
-
 
 
 module.exports = {
   entry: "./src/entry.js",
   output: {
-      path: path.join(__dirname, 'public'),
-      filename: "bundle.js",
+    path: path.join(__dirname, 'public'),
+    filename: "bundle.js",
   },
   resolve: {
     modules: ['node_modules', 'src/javascripts', 'src/stylesheets', 'src'],
@@ -28,21 +29,21 @@ module.exports = {
   ],
   devtool: 'source-map',
   module: {
-      loaders: [
-          {
-              test: /\.jsx?$/,
-              exclude: /(node_modules|bower_components)/,
-              loader: 'babel-loader',
-          },
-          {
-            test: /\.css$/,
-            loader: 'style-loader!css-loader'
-          },
-          {
-            test: /\.sass$/,
-            loader: 'style-loader!css-loader!sass-loader?indentedSyntax&sourceMap'
-          },
-      ]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.sass$/,
+        loader: 'style-loader!css-loader!sass-loader?indentedSyntax&sourceMap'
+      },
+    ]
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),

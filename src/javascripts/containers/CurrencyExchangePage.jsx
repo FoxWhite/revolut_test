@@ -18,6 +18,7 @@ import fx from 'money';
 
 type Props = {
   ratesData:  RatesStore,
+  dispatch:   Function,
 };
 
 @connect(state => ({
@@ -82,7 +83,7 @@ export default class CurrencyExchangePage extends Component {
         currentState.fromAmount, {
           from: val,
           to: currentState.toCurrency
-      }),
+        }),
     }));
   }
 
@@ -93,9 +94,9 @@ export default class CurrencyExchangePage extends Component {
       toAmount: currentState.toAmount,
       fromAmount: this.money.convert(
         currentState.toAmount, {
-        from: val,
-        to: currentState.fromCurrency
-      }),
+          from: val,
+          to: currentState.fromCurrency
+        }),
     }));
   }
 
