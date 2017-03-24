@@ -5,6 +5,10 @@ import {
   roundToDecimals,
 } from 'helpers';
 
+import {
+  transactionIsValid,
+  hasEnoughMoney,
+} from 'helpers/validation';
 
 describe('ratesAreLoaded', () => {
   let mockRatesStore = {
@@ -45,3 +49,23 @@ describe('roundToDecimals', () => {
     expect(roundToDecimals(0.908095, 5)).toBe(0.9081);
   });
 });
+
+describe('transactionIsValid', () => {
+  const accounts = {'EUR': 100};
+  it('should check that account of given currency has enough money to give the needed sum', () => {
+    expect(transactionIsValid(accounts, 'EUR', 1000 )).toBe(false);
+    expect(transactionIsValid(accounts, 'EUR', 100 )).toBe(true);
+    expect(transactionIsValid(accounts, 'EUR', 10 )).toBe(true);
+  });
+});
+
+describe('hasEnoughMoney', () => {
+  const accounts = {'EUR': 100};
+  it('should check if needed sum does not exceed account value', () => {
+    expect(hasEnoughMoney(accounts['EUR'], 100)).toBe(true);
+    expect(hasEnoughMoney(accounts['EUR'], 42)).toBe(true);
+    expect(hasEnoughMoney(accounts['EUR'], 1000)).toBe(false);
+  });
+});
+
+

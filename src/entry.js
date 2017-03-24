@@ -3,7 +3,6 @@ import App   from './javascripts/App.jsx'
 import React from 'react'
 import { render }   from 'react-dom'
 import { Provider } from 'react-redux'
-import config       from 'config';
 import store from 'redux/reducers';
 
 main();

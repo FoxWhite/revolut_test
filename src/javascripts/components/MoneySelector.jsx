@@ -15,6 +15,7 @@ type Props = {
   selectValue: string,
   selectOpts: {},
   onSelectChange: Function,
+  valid: boolean,
 };
 
 const MoneySelector = (props: Props) => {
@@ -24,11 +25,13 @@ const MoneySelector = (props: Props) => {
     onInputChange,
     selectValue,
     selectOpts,
-    onSelectChange
+    onSelectChange,
+    valid,
   } = props;
   return (
     <span className="MoneySelector">
       <input
+        data-valid={valid}
         name={`amount-${namePostfix}`}
         type="number"
         value={inputValue}
