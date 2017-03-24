@@ -30,33 +30,24 @@ export default class App extends Component {
   props:     Props;
   ratesPoll: number;
 
-  componentWillReceiveProps(nextProps: Props) {
-    const currRates = this.props.ratesData.data.rates;
-    const nextRates = nextProps.ratesData.data.rates;
-    if (currRates !== nextRates) {
-      clearTimeout(this.ratesPoll);
-    }
-    if (!nextProps.ratesData.isFetching) {
-      this.startPoll();
-    }
-  }
-
   componentWillMount() {
     // we could also mapDispatchToProps.
     const { dispatch } = this.props;
     dispatch(getRates());
+    this.startPoll();
   }
 
   componentWillUnmount() {
     clearTimeout(this.ratesPoll);
   }
 
-  startPoll() {
+  startPoll = () => {
     const { dispatch } = this.props;
-    this.ratesPoll = setTimeout(
-      () => dispatch(getRates()),
-      ratesPollInterval
-    );
+    function poll() {
+      dispatch(getRates());
+      this.ratesPoll = setTimeout(poll.bind(this), ratesPollInterval);
+    }
+    this.ratesPoll = setTimeout(poll.bind(this), ratesPollInterval);
   }
 
   render() {
