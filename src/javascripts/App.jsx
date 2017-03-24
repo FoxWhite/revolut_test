@@ -1,19 +1,21 @@
-/**
- * @flow
- */
-
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import {ratesPollInterval}    from 'config';
 import {getRates} from 'redux/actions/exchangeRates';
 
 import CurrencyExchangePage from 'containers/CurrencyExchangePage';
+import AccountsDisplay      from 'components/AccountsDisplay';
 
 import 'stylesheets/index';
 
+/**
+ * @flow
+ */
+
 type Props = {
-  ratesData:  RatesStore,
-  dispatch:   Function,
+  ratesData:     RatesStore,
+  accountsData:  AccountsStore,
+  dispatch:      Function,
 };
 
 @connect(state => ({
@@ -58,9 +60,16 @@ export default class App extends Component {
   }
 
   render() {
-    const { ratesData } = this.props;
+    const { accountsData } = this.props;
     return (
-      <CurrencyExchangePage ratesData={ratesData} />
+      <span>
+        <aside>
+          <AccountsDisplay accounts={accountsData} />
+        </aside>
+        <main>
+          <CurrencyExchangePage />
+        </main>
+      </span>
     );
   }
 }

@@ -2,7 +2,6 @@
   * @flow
   */
 import config from 'config';
-import fx from 'money';
 
 import {
   checkStatus,
@@ -40,7 +39,7 @@ const ratesFetchSuccess = (rates) =>
 
 
 const getRates = () => {
-  return function (dispatch: any) {
+  return function (dispatch: Function) {
     return new Promise((resolve) => {
       resolve(dispatch(ratesFetchBegin()))
     })

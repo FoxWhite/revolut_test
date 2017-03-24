@@ -34,3 +34,5 @@ I chose [Open exchange rates](https://openexchangerates.org/) as a data source f
 We need to update the rates data every 30 seconds. To implement the polling I chose to use `redux-thunk` and handle all the polling timer logic in the component. There are pros and cons to that. Here, as the component lifecycle is not too complicated, I guess it's fine. In larger projects though I'd consider using some more complex tools that allow to handle async actions better than `thunks` do.
 
 Inputs are of types 'number'. I find their behaviour not ideal at all but I chose them so save time on input digit-only validation.
+
+For storing accounts data in localStorage I just use some helpers. There are some nice libs like [localForage](https://github.com/localForage/localForage) but I thought for a project like this it'd be an overkill.

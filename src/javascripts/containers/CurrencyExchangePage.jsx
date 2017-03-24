@@ -1,33 +1,38 @@
-/**
- * @flow
- */
-
 import React, { Component }  from 'react';
+import { connect }           from 'react-redux';
+
 import {
   ratesAreLoaded,
   roundToDecimals,
 }                            from 'helpers';
 import CurrentRatesDisplay   from 'components/CurrentRatesDisplay';
 import MoneySelector         from 'components/MoneySelector';
+import { transfer }          from 'redux/actions/accounts';
 
 import { supportedCurrencies } from 'config';
 import fx from 'money';
+
+/**
+ * @flow
+ */
 
 type Props = {
   ratesData:  RatesStore,
 };
 
-type CurrencySelectorValue = $Keys<typeof supportedCurrencies>;
-
+@connect(state => ({
+  ratesData:    state.rates,
+}))
 export default class CurrencyExchangePage extends Component {
   props: Props;
   money: Function;
   state: {
     ratesLoaded:  boolean,
-    fromCurrency: CurrencySelectorValue,
-    toCurrency:   CurrencySelectorValue,
+    fromCurrency: CurrencyString,
+    toCurrency:   CurrencyString,
     fromAmount:   number,
     toAmount:     number,
+    canTransfer:  boolean,
   };
 
   constructor(props: Props) {
@@ -39,6 +44,7 @@ export default class CurrencyExchangePage extends Component {
       toCurrency: 'GBP',
       fromAmount: 0,
       toAmount: 0,
+      canTransfer: true, //todo False
     }
   }
 
@@ -62,6 +68,10 @@ export default class CurrencyExchangePage extends Component {
     this.money.base = data.base;
     this.setState({ratesLoaded: true});
   }
+
+  /*
+   *   Event handlers
+   */
 
   onChangeFromCurrency = (val: string) => {
     this.setState((currentState) => ({
@@ -121,6 +131,18 @@ export default class CurrencyExchangePage extends Component {
     }));
   }
 
+  onTransferClick = () => {
+    if (!this.state.canTransfer) return;
+    const { dispatch } = this.props;
+    const {
+      fromCurrency,
+      toCurrency,
+      fromAmount,
+      toAmount } = this.state;
+
+    dispatch(transfer(fromCurrency, toCurrency, fromAmount, toAmount));
+  }
+
   render() {
     const selectOpts = Object.keys(supportedCurrencies).map(
       cur => ({value: cur, label: cur})
@@ -131,6 +153,7 @@ export default class CurrencyExchangePage extends Component {
       ratesLoaded,
       fromAmount,
       toAmount,
+      canTransfer,
     } = this.state;
     const {error} =  this.props.ratesData;
 
@@ -164,6 +187,11 @@ export default class CurrencyExchangePage extends Component {
             selectOpts={selectOpts}
             onSelectChange={(e) => this.onChangeFromCurrency(e.value)}
           />
+          <button
+            className={`transfer-button ${canTransfer ? '' : 'disabled'}`}
+            onClick={this.onTransferClick}
+          >transfer!
+          </button>
         </div>
         <button className="swap-button"
           onClick={this.onSwapClick}

@@ -1,37 +1,52 @@
 .revolut-app-wrapper
-  text-align: center
-  margin-top: 20vh
+  padding-left:  $page-sidepadding
+  padding-right: $page-sidepadding
 
-  .exchanger-wrapper
-    display: inline-block
-    margin: auto
-    position: relative
+  main
+    margin-top: 5em
+    text-align: center
 
-  .money-selector-wrapper, .swap-button
-    display: inline-block
-    vertical-align: top
-
-  .money-selector-wrapper
-    width: auto
-    text-align: left
-
-    margin: 20px 40px
-
-  .swap-button
-    margin: 20px 0
-    border: none
-    outline: none
-    background: none
-    cursor: pointer
-    padding-top: 6px
-    font-size: 20px
-    width: $inputH
-    height: $inputH
-    @media #{$mobile-screen}
-      display: block
+    .exchanger-wrapper
+      margin-top: 2em
+      display: inline-block
       margin: auto
+      position: relative
+
+    .money-selector-wrapper, .swap-button
+      display: inline-block
+      vertical-align: top
+
+    .money-selector-wrapper
+      width: auto
+      text-align: left
+
+      margin: 20px 40px
+
+    .swap-button
+      margin: 20px 0
+      padding-top: 6px
+      font-size: 20px
+      width: $inputH
+      height: $inputH
+      @media #{$mobile-screen}
+        display: block
+        margin: auto
+
+    .transfer-button
+      font-size: 16px
+      margin-left: 1px
+      margin-top: 2em
+      background-color: #6AE98C
+      border: 1px solid $color-border
+      border-radius: 4px
+      display: block
+      width: 200px
+      height: $inputH
+      max-width: 30vw
+      &.disabled
+        background-color: #E9E9E9
+        cursor: auto
 
 
-
-  .error-message
-    color: $color-error
+    .error-message
+      color: $color-error

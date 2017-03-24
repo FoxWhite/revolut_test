@@ -1,6 +1,3 @@
-/**
-  * @flow
-  */
 
 const loadLS = (stateName: string) => {
   try {
