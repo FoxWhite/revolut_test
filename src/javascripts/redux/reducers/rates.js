@@ -4,7 +4,7 @@ import {
   RATES_FETCH_ERROR,
 } from 'redux/actions/exchangeRates';
 
-export const initialState = {
+export const initialRatesState = {
     data: {
       rates: {},
       base: '',
@@ -13,7 +13,7 @@ export const initialState = {
     error: null,
 };
 
-export const ratesReducer = (state = initialState, action) => {
+export const ratesReducer = (state = initialRatesState, action) => {
   switch (action.type) {
     case RATES_FETCH_BEGIN: {
       return { ...state, isFetching: true, error: null };

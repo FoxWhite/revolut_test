@@ -17,7 +17,8 @@ type Props = {
 };
 
 @connect(state => ({
-  ratesData:    state,
+  ratesData:    state.rates,
+  accountsData: state.accounts,
 }))
 export default class App extends Component {
   // Some flow typing instead of propTypes here.
