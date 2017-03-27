@@ -8,16 +8,14 @@ type ValidatorResult = {
 };
 
 type ValidatorConfig = {
-  accounts:     AccountsStore,
   ratesLoaded:  boolean,
   fromAmount:   number,
   fromCurrency: CurrencyString,
   toAmount:     number
 };
 
-const validate = ( config: ValidatorConfig): ValidatorResult => {
+const validate = (accounts: AccountsStore, config: ValidatorConfig): ValidatorResult => {
   const {
-    accounts,
     ratesLoaded,
     fromAmount,
     fromCurrency,

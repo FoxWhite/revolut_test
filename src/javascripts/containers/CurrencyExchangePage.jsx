@@ -39,6 +39,7 @@ export default class CurrencyExchangePage extends Component {
     toAmount:     number,
     validator:    ValidatorResult;
   };
+  validate: Function;
 
   constructor(props: Props) {
     super(props);
@@ -54,6 +55,7 @@ export default class CurrencyExchangePage extends Component {
         fromAmountIsValid: true,
       }
     }
+    this.validate = validate.bind(null, props.accountsData);
   }
 
   componentWillMount() {
@@ -64,18 +66,15 @@ export default class CurrencyExchangePage extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { ratesData, accountsData } = nextProps;
+    const { ratesData } = nextProps;
     if (ratesAreLoaded(ratesData)) {
       this.setNewRates(ratesData);
     }
     if(this.props.accountsData !== nextProps.accountsData) {
-      const validatorConfig = {
-        ...this.state,
-        accounts: accountsData
-      };
-      this.setState({
-        validator: validate(validatorConfig)
-      });
+      this.validate = validate.bind(null, nextProps.accountsData);
+      this.setState((state) => ({
+        validator: this.validate(state)
+      }));
     }
   }
 
@@ -91,8 +90,6 @@ export default class CurrencyExchangePage extends Component {
    */
 
   onChangeFromCurrency = (val: string) => {
-    const { accountsData } = this.props;
-
     this.setState((currentState) => {
       const toAmountConverted = this.money.convert(
         currentState.fromAmount, {
@@ -103,21 +100,18 @@ export default class CurrencyExchangePage extends Component {
         ...currentState,
         toAmount:     toAmountConverted,
         fromCurrency: val,
-        accounts:     accountsData,
       };
       return {
         fromCurrency: val,
         // we must also recalculate the digits.
         fromAmount: currentState.fromAmount,
         toAmount: toAmountConverted,
-        validator: validate(validatorConfig)
+        validator: this.validate(validatorConfig)
       }
     });
   }
 
   onChangeToCurrency = (val: string) => {
-    const { accountsData } = this.props;
-
     this.setState((currentState) => {
       const fromAmountConverted = this.money.convert(
         currentState.toAmount, {
@@ -127,21 +121,18 @@ export default class CurrencyExchangePage extends Component {
       const validatorConfig = {
         ...currentState,
         fromAmount: fromAmountConverted,
-        accounts: accountsData,
       };
       return {
         toCurrency: val,
         // we must also recalculate the digits
         toAmount: currentState.toAmount,
         fromAmount: fromAmountConverted,
-        validator: validate(validatorConfig)
+        validator: this.validate(validatorConfig)
       }
     });
   }
 
   onChangeFromAmount = (val: string) => {
-    const { accountsData } = this.props;
-
     this.setState((currentState) => {
       const toAmountConverted = this.money.convert(val, {
         from: currentState.fromCurrency,
@@ -151,19 +142,16 @@ export default class CurrencyExchangePage extends Component {
         ...currentState,
         fromAmount: val,
         toAmount: toAmountConverted,
-        accounts: accountsData,
       };
       return {
         fromAmount: val,
         toAmount: toAmountConverted,
-        validator: validate(validatorConfig)
+        validator: this.validate(validatorConfig)
       }
     });
   }
 
   onChangeToAmount = (val: string) => {
-    const { accountsData } = this.props;
-
     this.setState((currentState) => {
       const fromAmountConverted = this.money.convert(val, {
         from: currentState.toCurrency,
@@ -172,19 +160,16 @@ export default class CurrencyExchangePage extends Component {
       const validatorConfig = {
         ...currentState,
         fromAmount: fromAmountConverted,
-        accounts: accountsData,
       };
       return {
         toAmount: val,
         fromAmount: fromAmountConverted,
-        validator: validate(validatorConfig)
+        validator: this.validate(validatorConfig)
       }
     });
   }
 
   onSwapClick = () => {
-    const { accountsData } = this.props;
-
     this.setState((currentState) => {
       const toAmountConverted = this.money.convert(currentState.fromAmount, {
         from: currentState.toCurrency,
@@ -194,14 +179,13 @@ export default class CurrencyExchangePage extends Component {
         ...currentState,
         toAmount: toAmountConverted,
         fromCurrency: currentState.toCurrency,
-        accounts: accountsData,
       };
       return {
         // swap currencies, recalc 'to' amount.
         toCurrency:   currentState.fromCurrency,
         fromCurrency: currentState.toCurrency,
         toAmount: toAmountConverted,
-        validator: validate(validatorConfig)
+        validator: this.validate(validatorConfig)
       }
     });
   }
