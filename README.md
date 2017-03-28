@@ -27,6 +27,8 @@ Runs Jest tests.
 
 ## About:
 
+[Demo](https://foxwhite.github.io/revolut_test/public/) 
+
 While doing this task, I tried to balance between demonstrating my technical skills and knowledge on the one hand, and not overcomplicating things (this being a small project) on the other.
 
 I chose [Open exchange rates](https://openexchangerates.org/) as a data source for currency exchange rates. They provide a free (yet somewhat limited) API to get the data we need. Despite the free access plan only provides a basic data structure, there's a [nice little currency conversion library](https://openexchangerates.github.io/money.js/) by the very same team. As it works seamlessly with the API response and suits our needs perfectly, this is what I chose as the main tool for currency conversion.
