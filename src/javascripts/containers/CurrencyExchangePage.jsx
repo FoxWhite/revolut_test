@@ -91,7 +91,12 @@ export default class CurrencyExchangePage extends Component {
   convert = (val: any, currencies: {from: string, to: string}) =>{
     const { from, to } = currencies;
     const converted = this.money.convert(val, {from, to});
-    return isNaN(converted) ? 0 : roundToDecimals(converted, 4);
+    if (isNaN(converted)) {return 0;}
+
+    const rate = this.money.convert(1, {from, to});
+    return rate >= 1
+        ? Math.ceil(converted * 100) / 100
+        : Math.floor(converted * 100) / 100
   }
   /*
    *   Event handlers
@@ -99,7 +104,6 @@ export default class CurrencyExchangePage extends Component {
 
   onChangeFromCurrency = (val: string) => {
     this.setState((currentState) => {
-
       const toAmountConverted = this.convert(
         currentState.fromAmount, {
           from: val,
