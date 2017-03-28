@@ -1,6 +1,6 @@
 import React from 'react';
 import './AccountsDisplay.sass';
-
+import { roundToDecimals } from 'helpers';
 import { supportedCurrencies } from 'config';
 
 /**
@@ -19,7 +19,7 @@ const AccountsDisplay = ({accounts}: Props) =>
     {
       Object.keys(accounts).map((acc, i) => {
         const symbol = supportedCurrencies[acc];
-        return <li key={i}>{`${acc}: ${symbol}${accounts[acc]}`}</li>
+        return <li key={i}>{`${acc}: ${symbol}${roundToDecimals(accounts[acc], 2)}`}</li>
       })
     }
     </ul>
