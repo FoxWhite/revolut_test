@@ -33,7 +33,7 @@ const MoneySelector = (props: Props) => {
       <input
         data-valid={valid}
         name={`amount-${namePostfix}`}
-        type="number"
+        type="tel"
         value={inputValue}
         onChange={onInputChange}
       />

@@ -17,3 +17,4 @@ export const ratesAreLoaded = (ratesData: RatesStore): boolean => {
 
 export const roundToDecimals = (val: number, decimalPlaces: number): number =>
   Math.round(val * (10 ** decimalPlaces)) / (10 ** decimalPlaces)
+

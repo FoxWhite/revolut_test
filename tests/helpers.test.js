@@ -8,6 +8,7 @@ import {
 import {
   transactionIsValid,
   hasEnoughMoney,
+  validMoneyInput,
 } from 'helpers/validation';
 
 describe('ratesAreLoaded', () => {
@@ -68,4 +69,23 @@ describe('hasEnoughMoney', () => {
   });
 });
 
-
+describe('validMoneyInput', () => {
+  it('should check money input is positive floating point number', () => {
+    expect(validMoneyInput(1)).toBe(true);
+    expect(validMoneyInput(1.23)).toBe(true);
+    expect(validMoneyInput(-1.23)).toBe(false);
+    expect(validMoneyInput('23')).toBe(true);
+  });
+  it('should parse strings', () => {
+    expect(validMoneyInput('23')).toBe(true);
+    expect(validMoneyInput('-23')).toBe(false);
+  });
+  it('should parse point', () => {
+    expect(validMoneyInput('12.3')).toBe(true);
+    expect(validMoneyInput('12.')).toBe(true);
+    expect(validMoneyInput('.')).toBe(true);
+  });
+  it('should check point is single', () => {
+    expect(validMoneyInput('12.3.42')).toBe(false);
+  });
+});

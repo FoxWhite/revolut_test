@@ -37,7 +37,6 @@ const transactionIsValid = (
   accounts:     AccountsStore,
   fromCurrency: CurrencyString,
   fromAmount:   number) => {
-
   return hasEnoughMoney(accounts[fromCurrency], fromAmount)
 }
 
@@ -45,9 +44,16 @@ const hasEnoughMoney = (sumOnAccount: number, sumNeeded: number) =>
   sumOnAccount >= sumNeeded
 
 
+// should be a floating point number (optional decimal part) or a '.'
+const validMoneyInput = (input: string) => {
+  const moneyRegex = /^(([0-9]+)?(\.([0-9][0-9]?)?)?)$/;
+  return moneyRegex.test(input)
+}
+
 export {
   validate,
 
   transactionIsValid,
   hasEnoughMoney,
+  validMoneyInput,
 }

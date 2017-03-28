@@ -5,7 +5,10 @@ import {
   ratesAreLoaded,
   roundToDecimals,
 }                            from 'helpers';
-import { validate }          from 'helpers/validation';
+import {
+  validate,
+  validMoneyInput,
+}                            from 'helpers/validation';
 import CurrentRatesDisplay   from 'components/CurrentRatesDisplay';
 import MoneySelector         from 'components/MoneySelector';
 import { transfer }          from 'redux/actions/accounts';
@@ -85,13 +88,19 @@ export default class CurrencyExchangePage extends Component {
     this.setState({ratesLoaded: true});
   }
 
+  convert = (val: any, currencies: {from: string, to: string}) =>{
+    const { from, to } = currencies;
+    const converted = this.money.convert(val, {from, to});
+    return isNaN(converted) ? 0 : roundToDecimals(converted, 2);
+  }
   /*
    *   Event handlers
    */
 
   onChangeFromCurrency = (val: string) => {
     this.setState((currentState) => {
-      const toAmountConverted = this.money.convert(
+
+      const toAmountConverted = this.convert(
         currentState.fromAmount, {
           from: val,
           to: currentState.toCurrency
@@ -113,7 +122,7 @@ export default class CurrencyExchangePage extends Component {
 
   onChangeToCurrency = (val: string) => {
     this.setState((currentState) => {
-      const fromAmountConverted = this.money.convert(
+      const fromAmountConverted = this.convert(
         currentState.toAmount, {
           from: val,
           to: currentState.fromCurrency
@@ -132,9 +141,15 @@ export default class CurrencyExchangePage extends Component {
     });
   }
 
+
   onChangeFromAmount = (val: string) => {
+    val = val.replace(',', '.');
+    if (!validMoneyInput(val)) {
+      return;
+    }
+
     this.setState((currentState) => {
-      const toAmountConverted = this.money.convert(val, {
+      const toAmountConverted = this.convert(val, {
         from: currentState.fromCurrency,
         to: currentState.toCurrency
       });
@@ -152,8 +167,13 @@ export default class CurrencyExchangePage extends Component {
   }
 
   onChangeToAmount = (val: string) => {
+    val = val.replace(',', '.');
+    if (!validMoneyInput(val)) {
+      return;
+    }
+
     this.setState((currentState) => {
-      const fromAmountConverted = this.money.convert(val, {
+      const fromAmountConverted = this.convert(val, {
         from: currentState.toCurrency,
         to: currentState.fromCurrency
       });
@@ -171,7 +191,7 @@ export default class CurrencyExchangePage extends Component {
 
   onSwapClick = () => {
     this.setState((currentState) => {
-      const toAmountConverted = this.money.convert(currentState.fromAmount, {
+      const toAmountConverted = this.convert(currentState.fromAmount, {
         from: currentState.toCurrency,
         to: currentState.fromCurrency
       });
@@ -244,7 +264,7 @@ export default class CurrencyExchangePage extends Component {
           <MoneySelector
             valid={fromAmountIsValid}
             namePostfix="from"
-            inputValue={roundToDecimals(fromAmount, 4)}
+            inputValue={fromAmount}
             onInputChange={(e) => this.onChangeFromAmount(e.target.value)}
             selectValue={fromCurrency}
             selectOpts={selectOpts}
@@ -262,7 +282,7 @@ export default class CurrencyExchangePage extends Component {
         <div className="money-selector-wrapper">
           <MoneySelector
             namePostfix="from"
-            inputValue={roundToDecimals(toAmount, 4)}
+            inputValue={toAmount}
             onInputChange={(e) => this.onChangeToAmount(e.target.value)}
             selectValue={toCurrency}
             selectOpts={selectOpts}
