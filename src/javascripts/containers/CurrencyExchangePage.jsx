@@ -91,7 +91,7 @@ export default class CurrencyExchangePage extends Component {
   convert = (val: any, currencies: {from: string, to: string}) =>{
     const { from, to } = currencies;
     const converted = this.money.convert(val, {from, to});
-    return isNaN(converted) ? 0 : roundToDecimals(converted, 2);
+    return isNaN(converted) ? 0 : roundToDecimals(converted, 4);
   }
   /*
    *   Event handlers
